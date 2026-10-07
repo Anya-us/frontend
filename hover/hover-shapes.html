@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#181922">
+  <title>CSS 图形悬停效果</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+      background: #181922;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+    }
+
+    .stage {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 48px 24px;
+      overflow: hidden;
+    }
+
+    .shape-row {
+      width: min(100%, 1160px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(18px, 4vw, 48px);
+    }
+
+    .shape {
+      position: relative;
+      flex: 0 0 clamp(78px, 11.5vw, 140px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      box-shadow: 0 10px 20px var(--glow);
+      transition: transform 240ms ease, box-shadow 240ms ease;
+    }
+
+    .shape::after {
+      content: "hover";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: clamp(14px, 1.7vw, 20px);
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, .35);
+      opacity: 0;
+      transform: scale(.92);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .shape:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px var(--glow);
+    }
+
+    .shape:hover::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .square-coral {
+      --glow: rgba(255, 105, 91, .32);
+      background: linear-gradient(135deg, #ff8957, #ff5e68);
+    }
+
+    .rounded-green {
+      --glow: rgba(39, 205, 155, .28);
+      border-radius: 12px;
+      background: linear-gradient(135deg, #32d5a2, #25bf91);
+    }
+
+    .rounded-lavender {
+      --glow: rgba(172, 137, 186, .28);
+      border-radius: 24px;
+      background: linear-gradient(145deg, #b18bad, #79688f);
+    }
+
+    .circle-gold {
+      --glow: rgba(255, 177, 104, .25);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ffd968, #ffad78);
+    }
+
+    .square-teal {
+      --glow: rgba(85, 145, 129, .22);
+      border-radius: 9px;
+      background: linear-gradient(135deg, #4c806d, #426e78);
+    }
+
+    .circle-lavender {
+      --glow: rgba(177, 139, 189, .28);
+      border-radius: 50%;
+      background: radial-gradient(circle at 67% 34%, #c49fc3, #9179a6 76%);
+    }
+
+    @media (max-width: 620px) {
+      .stage { padding: 32px 20px; }
+
+      .shape-row {
+        width: min(100%, 390px);
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(22px, 8vw, 34px);
+      }
+
+      .shape {
+        width: clamp(74px, 21vw, 96px);
+        flex-basis: auto;
+        justify-self: center;
+      }
+
+      .shape::after { font-size: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage" aria-label="CSS 图形悬停效果展示">
+    <div class="shape-row">
+      <div class="shape square-coral" role="img" aria-label="珊瑚色正方形"></div>
+      <div class="shape rounded-green" role="img" aria-label="绿色圆角正方形"></div>
+      <div class="shape rounded-lavender" role="img" aria-label="紫色圆角正方形"></div>
+      <div class="shape circle-gold" role="img" aria-label="金色圆形"></div>
+      <div class="shape square-teal" role="img" aria-label="青绿色正方形"></div>
+      <div class="shape circle-lavender" role="img" aria-label="紫色圆形"></div>
+    </div>
+  </main>
+</body>
+</html>
